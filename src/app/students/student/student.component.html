@@ -1,0 +1,58 @@
+<div class="row">
+  <div class="col-md-6">
+    <form class="emp-form" #studentForm="ngForm" (ngSubmit)="onSubmit(studentForm)">
+        <input type="hidden" name="StudentId" #StudentId="ngModel" [(ngModel)]="studentService.selectedStudent.StudentId">
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input class="form-control" name="FirstName" #FirstName="ngModel" [(ngModel)]="studentService.selectedStudent.FirstName" placeholder="First Name" required>
+          <div class="validation-error" *ngIf="FirstName.invalid && FirstName.touched">This field is Required</div>
+        </div>
+        <div class="form-group col-md-6">
+          <input class="form-control" name="LastName" #LastName="ngModel" [(ngModel)]="studentService.selectedStudent.LastName" placeholder="Last Name" required>
+          <div class="validation-error" *ngIf="LastName.invalid && LastName.touched">This field is Required</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <input class="form-control" name="StudentCode" #StudentCode="ngModel" [(ngModel)]="studentService.selectedStudent.StudentCode" placeholder="StudentCode" required>
+          <div class="validation-error" *ngIf="StudentCode.invalid && StudentCode.touched">This field is Required</div>
+        </div>
+        <div class="form-group col-md-6">
+          <input class="form-control" name="City" #City="ngModel" [(ngModel)]="studentService.selectedStudent.City" placeholder="City"required>
+          <div class="validation-error" *ngIf="City.invalid && City.touched">This field is Required</div>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="form-group col-md-8">
+          <button type="submit" [disabled]="!studentForm.valid" class="btn btn-lg btn-block btn-info">Submit</button>
+        </div>
+        <div class="form-group col-md-4">
+          <button type="button" class="btn btn-lg btn-block btn-secondary" (click)="resetForm()">Reset</button>
+        </div>
+      </div>
+    </form>    
+  </div>
+  <div class="col-md-6">
+    <table class="table table-sm table-hover">
+      <tr>
+        <th class="text-center">StudentId</th>
+        <th class="text-center">Student Name</th>
+        <th class="text-center">StudentCode</th>
+        <th class="text-center">City</th>
+        <th class="text-center">Edit</th>
+        <th class="text-center">Delete</th>
+      </tr>
+      <tr *ngFor="let student of studentService.studentList">
+        <td>{{student.StudentId}}</td>
+        <td>{{student.FirstName}}  {{student.LastName}}</td>
+        <td>{{student.StudentCode}}</td>
+        <td>{{student.City}}</td>
+        <td class="">
+          <button type="button" class="btn btn-success" (click)="editRecord(student)">Edit</button>
+          
+        </td>
+        <td><button type="button" class="btn btn-Danger" (click)="onDelete(student)">Delete</button></td>
+      </tr>
+    </table>
+  </div>
+</div>
